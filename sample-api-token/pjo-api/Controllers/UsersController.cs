@@ -11,6 +11,24 @@ namespace pjo_api.Controllers
     public class UsersController : ApiController
     {
         [HttpGet]
+        [Route("gettime")]
+        [AllowAnonymous]
+        public IHttpActionResult GetTime()
+        {
+            try
+            {
+                return Ok(new
+                {
+                    Data = $"Time: {DateTime.Now}"
+                });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("getall")]
         [CustomAuthorize(Roles = "Admin")]
         public IHttpActionResult Get()
